@@ -11,4 +11,6 @@ public interface AccountService {
 	Optional<Account> getAccountById(Long id);
 
 	List<Account> getAllAccounts();
+	Optional<Account> updateAccount(Long id, Account accountDetails);
+	boolean deleteAccount(Long id);
 }

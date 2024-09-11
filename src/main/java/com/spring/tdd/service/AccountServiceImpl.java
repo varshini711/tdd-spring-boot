@@ -31,4 +31,26 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> getAllAccounts() {
 		return accountRepository.findAll();
 	}
+	
+	// Update account
+	@Override
+    public Optional<Account> updateAccount(Long id, Account accountDetails) {
+        return accountRepository.findById(id).map(existingAccount -> {
+            existingAccount.setName(accountDetails.getName());
+            existingAccount.setEmail(accountDetails.getEmail());
+            existingAccount.setBalance(accountDetails.getBalance());
+            return accountRepository.save(existingAccount);
+        });
+    }
+
+    // Delete account
+	@Override
+    public boolean deleteAccount(Long id) {
+        if (accountRepository.existsById(id)) {
+            accountRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
